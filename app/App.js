@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#c0c0c0',
   },
   textoH1: {
     fontSize: 40,
@@ -54,21 +55,31 @@ const styles = StyleSheet.create({
     marginBottom: 10
     
 
-},
-resultado:{
+  },
+  resultado:{
   fontSize: 20
 
-},
-feed:{
-  height: '70%',
-  width: '100%'
+  },
+  feed:{
+    height: '70%',
+    width: '100%'
 
-},
-result:{
-  height: '30%',
-  width: '100%'
+  },
+  result:{
+    height: '30%',
+    width: '100%'
 
-},
+  },
+  botao:{
+    height: '10%',
+    width: '50%',
+    borderWidth: 1,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#097bf4',
+
+  }
 
 });
 
@@ -83,26 +94,30 @@ function Feed(){
 
   function calcular(){
 
-  let soma = peso / (altura*altura)
+  let soma = (peso / (altura*altura)).toFixed(2)
 
   if(soma < 18.5){
 
     setTextoCalculo('Você esta a baixo do peso')
+    styles.resultado = {color: '#0000ff', fontSize: 20}
 
   }
   if(soma >= 18.5 && soma < 25 ){
 
     setTextoCalculo('Você esta no peso ideal')
+    styles.resultado = {color: '#008000', fontSize: 20}
 
   } 
   if(soma >= 25 && soma < 30 ){
 
     setTextoCalculo('Você esta com sobrepeso')
+    styles.resultado = {color: '#f67828', fontSize: 20}
 
   }
   if(soma >= 30 ){
 
     setTextoCalculo('Você esta obeso')
+    styles.resultado = {color: '#ff0000', fontSize: 20}
 
   }
 
@@ -119,7 +134,7 @@ return(
 
 <Text style={styles.textoH1}>Calcule seu IMC</Text>
 
-<Text style={styles.texto}>Insira sua altura (Em Cm):</Text>
+<Text style={styles.texto}>Insira sua altura (Metros):</Text>
 
   <TextInput
 
@@ -131,7 +146,7 @@ return(
 
 
 
-<Text style={styles.texto}>Insira seu peso (Em Kg):</Text>
+<Text style={styles.texto}>Insira seu peso (Kg):</Text>
 
 <TextInput
 
@@ -141,7 +156,7 @@ return(
      onChangeText={setPeso}
   />
 
-  <TouchableOpacity onPress={calcular}>
+  <TouchableOpacity onPress={calcular} style={styles.botao}>
   <Text>CALCULAR</Text>
   </TouchableOpacity>
   </View>
